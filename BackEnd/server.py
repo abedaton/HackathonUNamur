@@ -58,7 +58,10 @@ class Server:
 		while True:
 			c, a = self.sock.accept()
 			typeOfUser = c.recv(1024)
-			print(typeOfUser)
+			print("typeOfUser = ", typeOfUser)
+			action = c.recv(1024)
+			print("action = ", action)
+
 
 if __name__ == "__main__":
 	try:
