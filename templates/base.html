@@ -57,7 +57,17 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     {% block javascript %}{% endblock %}
+    <script>
+        $(document).ready(function() {
+            var docHeight = $(window).height();
+            var footerHeight = $('footer').height();
+            var footerTop = $('footer').position().top + footerHeight;
 
+            if (footerTop < docHeight) {
+                $('footer').css('margin-top', 0 + (docHeight - footerTop - 90) + 'px');
+            }
+        });
+    </script>
   </body>
 
 </html>
