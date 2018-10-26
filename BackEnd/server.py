@@ -54,14 +54,15 @@ class Server:
 			print("La table Seller_Info existe déjà")
 
 
-	#def run(self):
-	#	while True:
-	#		c, a = self.sock.accept()
-	#		username = c.recv(1024)
-	#		print(username)
+	def run(self):
+		while True:
+			c, a = self.sock.accept()
+			typeOfUser = c.recv(1024)
+			print(typeOfUser)
 
 if __name__ == "__main__":
 	try:
+		print("plop")
 		server = Server()
 		server.run()
 	except KeyboardInterrupt:
