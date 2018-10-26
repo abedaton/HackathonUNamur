@@ -3842,7 +3842,7 @@ input[type="button"].btn-block {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
 }
 
 .nav-link:hover, .nav-link:focus {
@@ -3959,7 +3959,7 @@ input[type="button"].btn-block {
 
 .appname {
   font-family: 'Karla', sans-serif;
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
