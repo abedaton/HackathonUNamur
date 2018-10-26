@@ -1,55 +1,26 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-
-    <title>Agreez</title>
-
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">Agreez</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Accueil
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">À propos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Inscription/Connexion</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
+{% extends "base.html" %}
+{% block title %}Accueil{% endblock %}
+{% block body %}
     <!-- Header with Background Image -->
     <header class="header">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <h1 class="display-3 text-center text-white mt-4">Business Name or Tagline</h1>
+            <h3 class="display-4 text-center m-5">Bienvenue sur {{ APPNAME }} !</h3>
+
+              <h4 class="display-5 text-center">Trouvez un producteur à <strong>votre proximité</strong> :</h4>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <form>
+              <div class="form-row">
+                <div class="col-12 col-md-9 mb-2 mb-md-0">
+                  <input type="email" class="form-control form-control-lg" placeholder="Saisissez votre code postal...">
+                </div>
+                <div class="col-12 col-md-3">
+                  <button type="submit" class="btn btn-block btn-lg btn-primary"><i class="fas fa-search"></i></button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -59,31 +30,24 @@
     <div class="container">
 
       <div class="row">
-        <div class="col-sm-8">
-          <h2 class="mt-4">What We Do</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A deserunt neque tempore recusandae animi soluta quasi? Asperiores rem dolore eaque vel, porro, soluta unde debitis aliquam laboriosam. Repellat explicabo, maiores!</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis optio neque consectetur consequatur magni in nisi, natus beatae quidem quam odit commodi ducimus totam eum, alias, adipisci nesciunt voluptate. Voluptatum.</p>
+        <div class="col-sm-6 my-6">
+          <h2 class="mt-4">Qu'est-ce que c'est ?</h2>
+          <p>{{ APPNAME }} a pour objectif de promouvoir une <strong>agriculture durable</strong> et <strong>écologique</strong> par la mise en place d'une plateforme de vente <strong>connectant les citoyens aux producteurs locaux</strong> qui les entourent.</p>
           <p>
-            <a class="btn btn-primary btn-lg" href="#">Call to Action &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="#">En savoir plus &raquo;</a>
           </p>
         </div>
-        <div class="col-sm-4">
-          <h2 class="mt-4">Contact Us</h2>
-          <address>
-            <strong>Start Bootstrap</strong>
-            <br>3481 Melrose Place
-            <br>Beverly Hills, CA 90210
-            <br>
-          </address>
-          <address>
-            <abbr title="Phone">P:</abbr>
-            (123) 456-7890
-            <br>
-            <abbr title="Email">E:</abbr>
-            <a href="mailto:#">name@example.com</a>
-          </address>
+        <div class="col-sm-6 my-6">
+          <h2 class="mt-4">Comment cela fonctionne ?</h2>
+          <ul>
+            <li>Saisissez votre code postal pour qu'une liste des producteurs les plus proches de vous s'affiche.</li>
+            <li>La liste des agriculteurs recense les produits que chacun vend</li>
+          </ul>
+
         </div>
       </div>
+
+
       <!-- /.row -->
 
       <div class="row">
@@ -129,19 +93,4 @@
 
     </div>
     <!-- /.container -->
-
-    <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-      </div>
-      <!-- /.container -->
-    </footer>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'js/jquery.min.css' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js.css' %}"></script>
-
-  </body>
-
-</html>
+{% endblock %}
