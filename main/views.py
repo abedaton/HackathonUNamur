@@ -11,3 +11,6 @@ def home(request):
 
 def map(request, postalCode):
     return render(request, "map.html")
+
+def register(request):
+    return render(request, "registration.html")
