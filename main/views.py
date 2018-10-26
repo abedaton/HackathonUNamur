@@ -7,5 +7,7 @@ from django.conf import settings
 from django.http import HttpResponse
 
 def home(request):
-    print(settings.NAME)
     return render(request, "index.html")
+
+def map(request, postalCode):
+    return render(request, "map.html")
