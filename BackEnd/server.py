@@ -20,6 +20,7 @@ class Server:
 		self.sock.bind((SERVER_IP, SERVER_PORT))
 		self.sock.listen(1)
 		self.goSQL()
+		self.getConnection()
 
 	def goSQL(self):
 		self.conn = sqlite3.connect(":memory:") # Using :memory: pour le moment, eviter de recréer un fichier .db chaque fois
@@ -54,19 +55,26 @@ class Server:
 			print("La table Seller_Info existe déjà")
 
 
-	def run(self):
+	def getConnection(self):
 		while True:
 			c, a = self.sock.accept()
-			typeOfUser = c.recv(1024)
-			print("typeOfUser = ", typeOfUser)
-			action = c.recv(1024)
-			print("action = ", action)
+			print(str(a[0]) + ":" + str(a[1]) + " vient de se connecter")
+			c.send(b"Bienvenue chez Agreez\n")
+			self.connections.append(c)
+			clientThread = threading.Thread(target=self.handleEachUser, args=(c,))
+			clientThread.daemon = True
+			clientThread.start()
+
+
+	def handleEachUser(self, c):
+		typeOfUser = c.recv(1024)
+		print("typeOfUser = ", typeOfUser)
+		action = c.recv(1024)
+		print("action = ", action)
 
 
 if __name__ == "__main__":
 	try:
-		print("plop")
 		server = Server()
-		server.run()
 	except KeyboardInterrupt:
 		print("Goodbye :)")

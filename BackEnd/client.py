@@ -17,7 +17,6 @@ class Client:
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	def __init__(self, address):
-		print("plop")
 		self.sock.connect((address, SERVER_PORT))
 
 		self.sendInfo()
@@ -60,7 +59,6 @@ class Client:
 
 if __name__ == "__main__":
 	try:
-		print("hey")
 		client = Client(SERVER_IP)
 	except Exception as e:
 		print(e)
