@@ -5,8 +5,9 @@ import threading
 import time
 import sys
 import os
-import sqlite3
 import getpass
+import pickle
+import re
 from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE, SIG_DFL)
 
@@ -50,9 +51,14 @@ class Client:
 
 
 	def connection(self, typeOfUser):
-		email = input("Address email: ")
+		email = input("\nAddress email: ")
+		while not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+			print("please enter a valid email address")
+			email = input("\nAddress email: ")
 		password = getpass.getpass() # pour ne pas voir le mot de passe s'afficher
-
+		data = pickle.dumps([email, password])
+		self.sock.send(data)
+		print("data sent :)")
 
 	def createAccount(self, typeOfUser):
 		pass

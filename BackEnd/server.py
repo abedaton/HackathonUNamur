@@ -6,6 +6,7 @@ import time
 import sys
 import os
 import sqlite3
+import pickle
 from signal import signal, SIGPIPE, SIG_DFL
 signal(SIGPIPE, SIG_DFL)
 
@@ -68,9 +69,13 @@ class Server:
 
 	def handleEachUser(self, c):
 		typeOfUser = c.recv(1024)
-		print("typeOfUser = ", typeOfUser)
 		action = c.recv(1024)
-		print("action = ", action)
+		[self.login(c) if action == b"connection" else self.createAccount(c)]
+
+	def login(self, c):
+		compressed_data = c.recv(1024)
+		data = pickle.loads(compressed_data)
+		print(data)
 
 
 if __name__ == "__main__":
