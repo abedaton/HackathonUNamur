@@ -32,7 +32,7 @@ class Client:
 		while not (answer == "1" or answer == "2"):
 			print("Veuillez entrer 1 ou 2")
 			answer = input("1/2 ?")
-		print("Bienvenue cher %s" %"client" if answer == "1" else "vendeur" )
+		print("Bienvenue cher %s" % ("client" if answer == "1" else "vendeur"))
 		self.sock.send(b"%s" % b"client" if answer == "1" else b"vendeur")	
 
 
