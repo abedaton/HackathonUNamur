@@ -93,9 +93,6 @@ class Client:
 
 
 
-
-
-
 if __name__ == "__main__":
 	try:
 		client = Client(SERVER_IP)

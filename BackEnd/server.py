@@ -90,10 +90,8 @@ class Server:
 			c.send(b"Wrong Username or password!")
 
 	def checkOK(self, c, typeOfUser, email, password):
-		database = "User_Info" if typeOfUser == "Client" else "Seller_Info;"
+		database = "User_Info" if typeOfUser == "Client" else "Seller_Info"
 		print("check : database = %s, email = %s, password = %s" % (database, email, password))
-		self.cursor.execute("SELECT email, password FROM " + database + ";")
-		names = self.cursor.fetchall()
 		
 		self.cursor.execute("SELECT * FROM " + database + " WHERE email = :email AND password = :password;", {"email": email, "password":password})
 		names = self.cursor.fetchall()
@@ -118,7 +116,6 @@ class Server:
 
 	def addUser(self, c, typeOfUser, name, lastname, email, password, phonenumber, zipCode):
 		database = "User_Info" if typeOfUser == "Client" else "Seller_Info"
-		#print("add : type = %s, email = %s, password = %s" % (typeOfUser, email, password))
 		if database == "User_Info":
 			self.cursor.execute("INSERT INTO User_Info(name, lastname, email, password, phonenumber, zipCode) VALUES (?, ?, ?, ?, ?, ?)", (name, lastname, email, password, phonenumber, zipCode))
 			self.conn.commit()
