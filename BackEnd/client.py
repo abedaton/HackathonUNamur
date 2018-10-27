@@ -56,12 +56,42 @@ class Client:
 			print("please enter a valid email address")
 			email = input("\nAddress email: ")
 		password = getpass.getpass() # pour ne pas voir le mot de passe s'afficher
-		data = pickle.dumps([email, password])
+		data = pickle.dumps([typeOfUser, email, password])
 		self.sock.send(data)
 		print("data sent :)")
 
 	def createAccount(self, typeOfUser):
-		pass
+		email = input("\nAddress email: ")
+		while not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+			print("please enter a valid email address")
+			email = input("\nAddress email: ")
+		password = getpass.getpass()
+		cpassword = getpass.getpass(prompt="Confirm password: ")
+		while password != cpassword:
+			print("Les deux passwords ne match pas")
+			password = getpass.getpass()
+			cpassword = getpass.getpass(prompt="Confirm password: ")
+		name = input("Entrez votre prénom: ")
+		lastname = input("Entrez votre nom: ")
+		while True:
+			try:
+				phonenumer = int(input("Entrez votre numero de telephone: "))
+				break
+			except:
+				print("Veuillez entrer un numero de telephone valide!")
+		while True:
+			try:
+				zipCode = int(input("Veuillez entrer votre code postal: "))
+				break
+			except:
+				print("Veuillez entrer un numero de code postal valide!")
+		data = pickle.dumps([typeOfUser, name, lastname, email, password, phonenumer, zipCode])
+		self.sock.send(data)
+		print("data sennnndddd :)")
+
+
+
+
 
 if __name__ == "__main__":
 	try:
