@@ -74,10 +74,10 @@ class Client:
 		name = input("Entrez votre prénom: ")
 		lastname = input("Entrez votre nom: ")
 		while True:
-			try:
-				phonenumer = int(input("Entrez votre numero de telephone: "))
+			phonenumer = input("Entrez votre numero de telephone: ")
+			if phonenumer.isdigit():
 				break
-			except:
+			else:
 				print("Veuillez entrer un numero de telephone valide!")
 		while True:
 			try:
