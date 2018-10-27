@@ -19,6 +19,9 @@ body {
   color: #343a40;
 }
 
+.space {
+  padding-top: 30px;
+}
 
 .card {
   height: 100%;

@@ -36,7 +36,7 @@
               <a class="nav-link" href="#"><i class="fas fa-question" style="padding-right:0.4em;"></i>À propos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal"><i class="fas fa-user-alt" style="padding-right:0.4em;"></i>Inscription/Connexion</a>
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal" onClick="$('#loginbox').show(); $('#signupbox').hide(); $('#citizenbox').hide(); $('#farmerbox').hide()""><i class=" fas fa-user-alt" style="padding-right:0.4em;"></i>Inscription/Connexion</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fas fa-pen-nib" style="padding-right:0.4em;"></i>Contact</a>
@@ -57,11 +57,88 @@
             </button>
           </div>
           <div class="modal-body">
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+
+            <form id="loginbox">
+              <p>Pas encore de compte ? <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">Veuillez-vous inscrire ici</a>.</p>
+              <div class="form-group">
+                <label for="InputEmail1">Adresse e-mail</label>
+                <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre adresse e-mail">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Mot de passe</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre mot de passe">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+              </div>
+            </form>
+
+            <form id="signupbox" style="">
+              <div class="form-group">
+                <center>
+                <h5>Je suis...</h5>
+                <button type="submit" class="btn btn-primary" onClick="$('#signupbox').hide(); $('#citizenbox').show()">Un citoyen</button>
+                <button type="submit" class="btn btn-primary" onClick="$('#signupbox').hide(); $('#farmerbox').show()">Un vendeur</button>
+                </center>
+              </div>
+            </form>
+
+            <form id="citizenbox">
+              <div class="form-group">
+                <label for="FirstName">Prénom</label>
+                <input type="text" class="form-control" id="InputFirstName" aria-describedby="emailHelp" placeholder="Entrez votre prénom">
+              </div>
+              <div class="form-group">
+                <label for="Name">Nom</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre nom de famille">
+              </div>
+              <div class="form-group">
+                <label for="InputEmail1">Adresse e-mail</label>
+                <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre adresse e-mail">
+              </div>
+              <div class="form-group">
+                <label for="InputEmail1">Numéro de téléphone</label>
+                <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre numéro de téléphone">
+              </div>
+              <div class="form-group">
+                <label for="Name">Adresse postale</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="rue de Bruxelles 61, 5000 Namur (BELGIQUE)">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">S'enregistrer</button>
+              </div>
+            </form>
+
+            <form id="farmerbox">
+              <div class="form-group">
+                <label for="FirstName">Prénom</label>
+                <input type="text" class="form-control" id="InputFirstName" aria-describedby="emailHelp" placeholder="Entrez votre prénom">
+              </div>
+              <div class="form-group">
+                <label for="Name">Nom</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Entrez votre nom de famille">
+              </div>
+              <div class="form-group">
+                <label for="InputEmail1">Adresse e-mail</label>
+                <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre adresse e-mail">
+              </div>
+              <div class="form-group">
+                <label for="InputEmail1">Numéro de téléphone</label>
+                <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre numéro de téléphone">
+              </div>
+              <div class="form-group">
+                <label for="Name">Adresse postale</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="rue de Bruxelles 61, 5000 Namur (BELGIQUE)">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">S'enregistrer</button>
+              </div>
+            </form>
+
+
           </div>
         </div>
       </div>
@@ -80,16 +157,16 @@
     <script src="{% static 'js/bootstrap.js' %}"></script>
     {% block javascript %}{% endblock %}
     <script>
-        $(document).ready(function() {
-            var docHeight = $(window).height();
-            var footerHeight = $("footer").height();
-            var footerTop = $('footer').position().top + footerHeight;
+      $(document).ready(function() {
+        var docHeight = $(window).height();
+        var footerHeight = $('footer').height();
+        var footerTop = $('footer').position().top + footerHeight;
 
-            if (footerTop < docHeight) {
-                $('footer').css('margin-top', (docHeight - footerTop - 90) + 'px');
-            }
-        });
+        if (footerTop < docHeight) {
+          $('footer').css('margin-top', 0 + (docHeight - footerTop - 90) + 'px');
+        }
+      });
     </script>
   </body>
 
-</html>
+  </html>
