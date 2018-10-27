@@ -12,5 +12,6 @@ def home(request):
 def map(request, postalCode):
     return render(request, "map.html")
 
-def registration(request):
-    return render(request, "registration.html")
+def farmer_page(request):
+    name = "Les produits de Sophie"
+    return render(request, "farmer_page.html", {"FARMER_NAME":name})
