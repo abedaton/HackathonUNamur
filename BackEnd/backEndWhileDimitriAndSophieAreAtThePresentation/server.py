@@ -10,6 +10,7 @@ import pickle
 from signal import signal, SIGPIPE, SIG_DFL
 import smtplib 
 import hashlib
+import array
 signal(SIGPIPE, SIG_DFL)
 
 SERVER_IP = "0.0.0.0"
@@ -52,8 +53,8 @@ class Server:
 				email text,
 				phonenumber text,
 				zipCode bigint,
-				stock bigint,
-				price real,
+				stock blob,
+				price blob,
 				openingHours text
 				)""")
 			print("Database Seller_Info créée")
@@ -130,6 +131,11 @@ class Server:
 		for i in range(1000):
 			password = hashlib.md5(bytes(password, "utf-8")).hexdigest()
 		return password
+
+	#def addUpdateItem(self, item, quantity):
+	#	self.cursor.execute()
+	#	oldItem = 
+	#	self.cursor.execute("UPDATE Seller_Info SET")
 
 
 if __name__ == "__main__":
