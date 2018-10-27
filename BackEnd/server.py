@@ -8,7 +8,8 @@ import os
 import sqlite3
 import pickle
 from signal import signal, SIGPIPE, SIG_DFL
-import smtplib # 
+import smtplib 
+import hashlib
 signal(SIGPIPE, SIG_DFL)
 
 SERVER_IP = "0.0.0.0"
@@ -66,7 +67,6 @@ class Server:
 		while True:
 			c, a = self.sock.accept()
 			print(str(a[0]) + ":" + str(a[1]) + " vient de se connecter")
-			#c.send(b"Bienvenue chez Agreez\n\n")
 			self.connections.append(c)
 			clientThread = threading.Thread(target=self.handleEachUser, args=(c,))
 			clientThread.daemon = True
@@ -83,7 +83,7 @@ class Server:
 		data = pickle.loads(compressed_data)
 		typeOfUser = data[0]
 		email = data[1]
-		password = data[2]
+		password = self.letsHash(data[2])
 		if self.checkOK(c, typeOfUser, email, password):
 			c.send(b"User logged in as " + bytes(email, "utf-8"))
 		else:
@@ -109,7 +109,7 @@ class Server:
 		name = data[1]
 		lastname = data[2]
 		email = data[3]
-		password = data[4]
+		password = self.letsHash(data[4])
 		phonenumber = data[5]
 		zipCode = data[6]
 		self.addUser(c, typeOfUser, name, lastname, email, password, phonenumber, zipCode)
@@ -126,7 +126,10 @@ class Server:
 			print("Seller added")
 		c.send(b"Vous avez ete inscrit!")
 
-
+	def letsHash(self, password):
+		for i in range(1000):
+			password = hashlib.md5(bytes(password, "utf-8")).hexdigest()
+		return password
 
 
 if __name__ == "__main__":
