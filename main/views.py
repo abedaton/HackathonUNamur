@@ -15,3 +15,9 @@ def map(request, postalCode):
 def farmer_page(request):
     name = "Les produits de Sophie"
     return render(request, "farmer_page.html", {"FARMER_NAME":name})
+
+def about(request):
+    return render(request, "about.html")
+
+def contact(request):
+    return render(request, "contact.html")

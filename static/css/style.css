@@ -30,3 +30,36 @@ body {
 .test {
   margin-bottom: 10px;
 }
+
+.supercontainer {
+  padding-top: 20px;
+}
+
+.settings {
+  text-align: right;
+}
+
+.jumbotron {
+  margin-top: 10px;
+  border: 1px solid #c1c9d0;
+  border-radius: 0;
+  padding: 20px;
+}
+
+.alert-warning {
+  height: 100px;
+  font-size: 1.1em;
+  padding-bottom: 10px;
+}
+
+.alert-info {
+  background-color: #dcf9de;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+

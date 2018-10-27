@@ -1,14 +1,159 @@
 {% extends "base.html" %}
-{% block title %}Accueil{% endblock %}
+{% load static %}
+{% block title %}{{ FARMER_NAME }}{% endblock %}
 {% block body %}
-<div class="container">
+<div class="supercontainer">
+  <div class="container">
 
-  <h4 class="display-4">{{ FARMER_NAME }}</h1>
-<div class="jumbotron">
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+
+    <h4 class="display-4">{{ FARMER_NAME }}</h4>
+    <div class="settings">
+      <h5><i class="fas fa-cog" style="padding-right:0.4em;"></i><a href="#">Modifier la page</a></h5>
+    </div>
+    <div class="jumbotron">
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et leo dapibus, viverra nisi vitae, laoreet sapien. Curabitur accumsan ultricies placerat. Donec ac velit condimentum, auctor leo in, vestibulum lacus.</p>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-9">
+
+        <h2>Nos produits</h2>
+
+
+        <div class="row">
+          <div class="test">
+            <div class="card" style="width: 16rem;">
+              <img class="card-img-top" src="{% static 'images/food/tomato.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Tomates</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Prix : 3.95€/kg</li>
+                <li class="list-group-item"><label for="exampleFormControlInput1">Quantité</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1, 2, 3, ..."></li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="btn btn-primary">Acheter</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="test">
+            <div class="card" style="width: 16rem;">
+              <img class="card-img-top" src="{% static 'images/food/tomato.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Tomates</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Prix : 3.95€/kg</li>
+                <li class="list-group-item"><label for="exampleFormControlInput1">Quantité</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1, 2, 3, ..."></li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="btn btn-primary">Acheter</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="test">
+            <div class="card" style="width: 16rem;">
+              <img class="card-img-top" src="{% static 'images/food/tomato.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Tomates</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Prix : 3.95€/kg</li>
+                <li class="list-group-item"><label for="exampleFormControlInput1">Quantité</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1, 2, 3, ..."></li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="btn btn-primary">Acheter</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="test">
+            <div class="card" style="width: 16rem;">
+              <img class="card-img-top" src="{% static 'images/food/tomato.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Tomates</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Prix : 3.95€/kg</li>
+                <li class="list-group-item"><label for="exampleFormControlInput1">Quantité</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1, 2, 3, ..."></li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="btn btn-primary">Acheter</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="test">
+            <div class="card" style="width: 16rem;">
+              <img class="card-img-top" src="{% static 'images/food/tomato.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Tomates</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Prix : 3.95€/kg</li>
+                <li class="list-group-item"><label for="exampleFormControlInput1">Quantité</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1, 2, 3, ..."></li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="btn btn-primary">Acheter</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="test">
+            <div class="card" style="width: 16rem;">
+              <img class="card-img-top" src="{% static 'images/food/tomato.jpg' %}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Tomates</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Prix : 3.95€/kg</li>
+                <li class="list-group-item"><label for="exampleFormControlInput1">Quantité</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="1, 2, 3, ..."></li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="btn btn-primary">Acheter</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="col-sm-3">
+        <h2>Adresse</h2>
+        <p><strong>{{ FARMER_NAME }}</strong><br />rue de Bruxelles 61,<br />5000 Namur<br />
+          BELGIQUE</p>
+        <p><i class="fas fa-mobile-alt"></i> : +32 2 21 38 51</p>
+
+        <h2>Horaires</h2>
+        <p>Vous pouvez récupérer vos produits auprès de {{ FARMER_NAME }} :</p>
+        <p>
+          <ul>
+            <li>Lundi : fermé</li>
+            <li>Mardi : 8h-10h, 14h-18h</li>
+            <li>Mercredi : 16-18h</li>
+            <li>Jeudi : 8h-10h</li>
+            <li>Vendredi : 10h-14h</li>
+            <li>Samedi : fermé</li>
+            <li>Dimanche : fermé</li>
+          </ul>
+        </p>
+      </div>
+
+
+    </div>
+
   </div>
-
-
-<h2>Nos produits</h2>
 </div>
 {% endblock %}

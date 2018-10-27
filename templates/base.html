@@ -27,19 +27,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home" style="padding-right:0.4em;"></i>Accueil
-                <span class="sr-only">(current)</span>
-              </a>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-home" style="padding-right:0.4em;"></i>Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-question" style="padding-right:0.4em;"></i>À propos</a>
+              <a class="nav-link" href="{% url 'about' %}"><i class="fas fa-question" style="padding-right:0.4em;"></i>À propos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-toggle="modal" data-target="#registerModal" onClick="$('#loginbox').show(); $('#signupbox').hide(); $('#citizenbox').hide(); $('#farmerbox').hide()""><i class=" fas fa-user-alt" style="padding-right:0.4em;"></i>Inscription/Connexion</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-pen-nib" style="padding-right:0.4em;"></i>Contact</a>
+              <a class="nav-link" href="{% url 'contact' %}"><i class="fas fa-pen-nib" style="padding-right:0.4em;"></i>Contact</a>
             </li>
           </ul>
         </div>
@@ -149,24 +147,13 @@
 
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; {{ APPNAME }} 2018</p>
+        <p class="m-0 text-center text-white">Copyright &copy; <span class="appname">{{ APPNAME }}</span> 2018</p>
       </div>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
     {% block javascript %}{% endblock %}
-    <script>
-      $(document).ready(function() {
-        var docHeight = $(window).height();
-        var footerHeight = $('footer').height();
-        var footerTop = $('footer').position().top + footerHeight;
-
-        if (footerTop < docHeight) {
-          $('footer').css('margin-top', 0 + (docHeight - footerTop - 90) + 'px');
-        }
-      });
-    </script>
   </body>
 
   </html>
