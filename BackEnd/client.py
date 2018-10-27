@@ -92,7 +92,6 @@ class Client:
 		print(str(connectedOrNot, "utf-8"))
 
 
-
 if __name__ == "__main__":
 	try:
 		client = Client(SERVER_IP)
