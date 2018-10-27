@@ -26,7 +26,7 @@ class Server:
 		self.getConnection()
 
 	def goSQL(self):
-		self.conn = sqlite3.connect("database.db", check_same_thread = False) # Using :memory: pour le moment, eviter de recréer un fichier .db chaque fois
+		self.conn = sqlite3.connect("../database.db", check_same_thread = False) # Using :memory: pour le moment, eviter de recréer un fichier .db chaque fois
 		self.cursor = self.conn.cursor()
 
 		try:
@@ -65,31 +65,31 @@ class Server:
 
 	def getConnection(self):
 		while True:
-			c, a = self.sock.accept()
+			self.c, a = self.sock.accept()
 			print(str(a[0]) + ":" + str(a[1]) + " vient de se connecter")
-			self.connections.append(c)
-			clientThread = threading.Thread(target=self.handleEachUser, args=(c,))
+			self.connections.append(self.c)
+			clientThread = threading.Thread(target=self.handleEachUser)
 			clientThread.daemon = True
 			clientThread.start()
 
 
-	def handleEachUser(self, c):
-		typeOfUser = c.recv(1024)
-		action = c.recv(1024)
-		[self.login(c) if action == b"connection" else self.createAccount(c)]
+	def handleEachUser(self):
+		typeOfUser = self.c.recv(1024) 
+		action = self.c.recv(1024)
+		[self.login() if action == b"connection" else self.createAccount()]
 
-	def login(self, c):
-		compressed_data = c.recv(1024)
+	def login(self):
+		compressed_data = self.c.recv(1024)
 		data = pickle.loads(compressed_data)
 		typeOfUser = data[0]
 		email = data[1]
 		password = self.letsHash(data[2])
-		if self.checkOK(c, typeOfUser, email, password):
-			c.send(b"User logged in as " + bytes(email, "utf-8"))
+		if self.checkOK(typeOfUser, email, password):
+			self.c.send(b"User logged in as " + bytes(email, "utf-8"))
 		else:
-			c.send(b"Wrong Username or password!")
+			self.c.send(b"Wrong Username or password!")
 
-	def checkOK(self, c, typeOfUser, email, password):
+	def checkOK(self, typeOfUser, email, password):
 		database = "User_Info" if typeOfUser == "Client" else "Seller_Info"
 		print("check : database = %s, email = %s, password = %s" % (database, email, password))
 		
@@ -101,8 +101,8 @@ class Server:
 		else:
 			return True
 
-	def createAccount(self, c):
-		compressed_data = c.recv(1024)
+	def createAccount(self):
+		compressed_data = self.c.recv(1024)
 		data = pickle.loads(compressed_data)
 		print(data)
 		typeOfUser = data[0]
@@ -112,9 +112,9 @@ class Server:
 		password = self.letsHash(data[4])
 		phonenumber = data[5]
 		zipCode = data[6]
-		self.addUser(c, typeOfUser, name, lastname, email, password, phonenumber, zipCode)
+		self.addUser(typeOfUser, name, lastname, email, password, phonenumber, zipCode)
 
-	def addUser(self, c, typeOfUser, name, lastname, email, password, phonenumber, zipCode):
+	def addUser(self, typeOfUser, name, lastname, email, password, phonenumber, zipCode):
 		database = "User_Info" if typeOfUser == "Client" else "Seller_Info"
 		if database == "User_Info":
 			self.cursor.execute("INSERT INTO User_Info(name, lastname, email, password, phonenumber, zipCode) VALUES (?, ?, ?, ?, ?, ?)", (name, lastname, email, password, phonenumber, zipCode))
@@ -124,7 +124,7 @@ class Server:
 			self.cursor.execute("INSERT INTO Seller_Info(name, lastname, email, password, phonenumber, zipCode) VALUES (?, ?, ?, ?, ?, ?)", (name, lastname, email, password, phonenumber, zipCode))
 			self.conn .commit()
 			print("Seller added")
-		c.send(b"Vous avez ete inscrit!")
+		self.c.send(b"Vous avez ete inscrit!")
 
 	def letsHash(self, password):
 		for i in range(1000):
