@@ -66,7 +66,7 @@ class Server:
 		while True:
 			c, a = self.sock.accept()
 			print(str(a[0]) + ":" + str(a[1]) + " vient de se connecter")
-			c.send(b"Bienvenue chez Agreez\n\n")
+			#c.send(b"Bienvenue chez Agreez\n\n")
 			self.connections.append(c)
 			clientThread = threading.Thread(target=self.handleEachUser, args=(c,))
 			clientThread.daemon = True
@@ -84,23 +84,16 @@ class Server:
 		typeOfUser = data[0]
 		email = data[1]
 		password = data[2]
-		if self.checkOK(typeOfUser, email, password):
-			print("User logged in as %s" %email)
+		if self.checkOK(c, typeOfUser, email, password):
+			c.send(b"User logged in as " + bytes(email, "utf-8"))
 		else:
-			print("Wrong Username")
+			c.send(b"Wrong Username or password!")
 
-	def checkOK(self, typeOfUser, email, password):
+	def checkOK(self, c, typeOfUser, email, password):
 		database = "User_Info" if typeOfUser == "Client" else "Seller_Info;"
 		print("check : database = %s, email = %s, password = %s" % (database, email, password))
 		self.cursor.execute("SELECT email, password FROM " + database + ";")
 		names = self.cursor.fetchall()
-		print("Email entered:", email)
-		print("Email in database:", names)
-		print("password entered:", password)
-		print("password in database:", names)
-		#print("email: ", email)
-		#email = str(email, "utf-8")
-		#password = str(password, "utf-8")
 		
 		self.cursor.execute("SELECT * FROM " + database + " WHERE email = :email AND password = :password;", {"email": email, "password":password})
 		names = self.cursor.fetchall()
@@ -120,11 +113,10 @@ class Server:
 		email = data[3]
 		password = data[4]
 		phonenumber = data[5]
-		print("phonenumer = " + phonenumber)
 		zipCode = data[6]
-		self.addUser(typeOfUser, name, lastname, email, password, phonenumber, zipCode)
+		self.addUser(c, typeOfUser, name, lastname, email, password, phonenumber, zipCode)
 
-	def addUser(self, typeOfUser, name, lastname, email, password, phonenumber, zipCode):
+	def addUser(self, c, typeOfUser, name, lastname, email, password, phonenumber, zipCode):
 		database = "User_Info" if typeOfUser == "Client" else "Seller_Info"
 		#print("add : type = %s, email = %s, password = %s" % (typeOfUser, email, password))
 		if database == "User_Info":
@@ -135,6 +127,7 @@ class Server:
 			self.cursor.execute("INSERT INTO Seller_Info(name, lastname, email, password, phonenumber, zipCode) VALUES (?, ?, ?, ?, ?, ?)", (name, lastname, email, password, phonenumber, zipCode))
 			self.conn .commit()
 			print("Seller added")
+		c.send(b"Vous avez ete inscrit!")
 
 
 

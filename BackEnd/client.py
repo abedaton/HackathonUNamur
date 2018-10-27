@@ -58,7 +58,8 @@ class Client:
 		password = getpass.getpass() # pour ne pas voir le mot de passe s'afficher
 		data = pickle.dumps([typeOfUser, email, password])
 		self.sock.send(data)
-		print("data sent :)")
+		loggedOrNot = self.sock.recv(1024)
+		print(str(loggedOrNot, "utf-8"))
 
 	def createAccount(self, typeOfUser):
 		email = input("\nAddress email: ")
@@ -87,7 +88,9 @@ class Client:
 				print("Veuillez entrer un numero de code postal valide!")
 		data = pickle.dumps([typeOfUser, name, lastname, email, password, phonenumer, zipCode])
 		self.sock.send(data)
-		print("data sennnndddd :)")
+		connectedOrNot = self.sock.recv(1024)
+		print(str(connectedOrNot, "utf-8"))
+
 
 
 
