@@ -1,0 +1,161 @@
+%\[f(x) = \frac{1}{1+e^-x}\]
+
+\documentclass[handout]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usetheme{Madrid}
+\usecolortheme{beaver}
+
+\title[Présentation du projet d'année]{INFO-F106 : Projets d'informatique 1\\Présentation du projet d'année}
+\author{Sophie Tysebaert, Dimitri Wauters}
+\date{2 mai 2018}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Présentation générale du projet}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Classification à l'aide de réseaux de neurones}
+  \framesubtitle{Objectifs et tâches}
+  \begin{itemize}
+  \item Implémentation de réseaux de neurones en Python (intelligence artificielle)
+  \item Effectuer de la classification de données : reconnaître des chiffres entre 0 et 9 écrits à la main
+  \item Utilisation du jeu de données MNIST (\emph{Modified National Institute of Standards and Technology dataset}) : 60 000 images en noir et blanc uniquement, de 28*28 pixels
+  \end{itemize}
+  \begin{center}
+  \includegraphics{mnist.png}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Des réseaux de neurones ?}
+  \begin{itemize}
+  \item Un neurone = une unité de calcul, représentant de l'information
+  \item Application d'une fonction d'activation sur le neurone (résultat de sortie entre 0 et 1)
+  \item Résultat communiqué à d'autres neurones auxquels le neurone de départ est relié, grâce à des \emph{connexions}
+  \item Les connexions sont chacune associées à un nombre, le \emph{poids}, dont la valeur changera au cours du processus
+  \item Un réseau de neurones = neurones + connexions entre paires de neurones, ces derniers étant arrangés en \emph{couches}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quel processus ?}
+  \begin{itemize}
+  \item Effectuer de la classification de données après une phase d'\emph{apprentissage} : entraînement des réseaux de neurones à réaliser cette classification de manière la plus juste possible
+  \item La phase d'apprentissage = \textbf{renforcer} certaines connexions neuronales
+  \item Ce sont elles qui vont déterminer la réponse finale des réseaux de neurones face à une tâche qui leur a été assignée
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quel processus ?}
+  \framesubtitle{L'entraînement}
+  Entraînement de dix \textbf{perceptrons}\footnote{Un perceptron = une association de couches de neurones ; ici, = un réseau de neurones avec une couche d'entrée et une couche de sortie constituée d'un unique neurone.} un à un, chacun correspondant à un chiffre spécifique, et on sauvegarde leurs meilleurs vecteurs poids (= les meilleures valeurs de leurs connexions).
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Le fonctionnement de l'intelligence}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Réflexion philosophique sur l'apprentissage}
+  	\begin{alertblock}{}
+  	Lors de l'étape d'entraînement, \textbf{le but d'un perceptron est de faire de la classification binaire du type : représente l’objet/ne représente pas l’objet}.
+		\end{alertblock}
+		  L'intelligence humaine ne procède-t-elle pas de la même manière ? \emph{Définir} quelque chose, c'est instituer un rapport entre un dedans et un dehors.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Application du réseau de neurones...}
+
+\subsection{sur d'autres images}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Application du réseau de neurones...}
+  \framesubtitle{sur d'autres images}
+  \textcolor[HTML]{BA0D30}{Étape du \emph{drop out}} :
+  \begin{itemize}
+  \item Contrer le problème de surapprentissage (\emph{overfitting}) sur un jeu de données \emph{spécifique}
+  \item Désactivation de certaines connexions (et donc de certains neurones) : ajout de bruit dans l'apprentissage
+  \end{itemize}
+\end{frame}
+
+\subsection{sur d'autres jeux de données}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Application du réseau de neurones...}
+  \framesubtitle{sur d'autres jeux de données}
+  \begin{itemize}
+  \item Fashion MNIST (70 000 images en noir et blanc représentant dix catégories de vêtements, 28*28 pixels)
+  \item Cifar-10 (50 000 images en couleur représentant des objets divers, 32*32 pixels)
+  \end{itemize}
+  \begin{columns}[c]
+		\begin{column}{4cm}
+		\includegraphics[scale=0.045]{zalando.jpg}
+		\end{column}
+		\begin{column}{4cm}
+		\includegraphics[scale=0.2]{cifar-10.png}
+		\end{column}
+		\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Différence de performances}
+  Résultats sur \texttt{np.seed~=~25} avec les paramètres par défaut\footnote{$\alpha$ : 0.5 ; \emph{p} : 0.5 ; critère de convergence $\varepsilon$ : 0.0001 ; \emph{learning rate} $\eta$ : 0.001 ; taille de la couche intermédiaire : 10 ; itérations du processus : 4 ; itérations de la phase d'entraînement : 20.}, sur un \emph{set} de données de 2000 images environ : 
+  
+  \begin{center}
+  \begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+  \hline
+  Jeu de données & Score \\
+  \hline
+  MNIST & 76.78\% \\
+  Fashion MNIST & 66.18\% \\
+  Cifar-10 & 15.62\% \\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Différence de performances}
+  \framesubtitle{Interprétation}
+   Le pourcentage de prédictions correctes est inversément proportionnel au nombre d'informations présentes sur chaque image.
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusion}
+  Merci de votre attention ! :-)
+\end{frame}
+
+\end{document}
