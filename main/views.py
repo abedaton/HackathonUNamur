@@ -29,3 +29,6 @@ def contact(request):
 
 def login(request):
     pass
+
+def news(request):
+    return render(request, "fil.html")
