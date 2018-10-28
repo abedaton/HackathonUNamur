@@ -1,2 +1,2 @@
 # HackathonUNamur
-Githut of the Smart Rurality Hackathon of Namur.
+GithuB of the Smart Rurality Hackathon of Namur.
