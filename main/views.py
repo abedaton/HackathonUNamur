@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from django.template import RequestContext
 from django.conf import settings
+from .forms import LoginForm
 
 # Create your views here.
 
 from django.http import HttpResponse
 
 def home(request):
-    return render(request, "index.html")
+    form = LoginForm(request.POST or None)
+    print(form.is_valid())
+    if form.is_valid():
+        print(form.cleaned_data['mail'])
+    return render(request, "index.html", locals())
 
 def map(request, postalCode):
     return render(request, "map.html")
@@ -21,3 +26,6 @@ def about(request):
 
 def contact(request):
     return render(request, "contact.html")
+
+def login(request):
+    pass

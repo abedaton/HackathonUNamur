@@ -65,3 +65,20 @@ footer {
   bottom: 0;
   width: 100%;
 }
+
+.modal-lg {
+    max-width: 1000px;
+}
+
+.basket {
+    margin-left: 35%;
+    font-size: 36px;
+    color: white;
+    position: absolute;
+    margin-top: -15px;
+}
+
+.basket .badge {
+	position: absolute;
+    font-size: 14px;
+}
